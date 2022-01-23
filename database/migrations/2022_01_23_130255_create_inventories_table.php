@@ -15,6 +15,8 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->json('data');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

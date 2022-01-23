@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNoticesTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateNoticesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notices', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('message');
-            $table->string('image');
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('package_id')->constrained();
+            $table->string('amount');
+            $table->foreignId('delivered_by')->constrained('users');
+            $table->string('image');
+            $table->foreignId('reason_id')->constrained();
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ class CreateNoticesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notices');
+        Schema::dropIfExists('orders');
     }
 }
