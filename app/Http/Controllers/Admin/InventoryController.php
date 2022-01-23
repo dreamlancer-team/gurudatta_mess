@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Inventory;
 use App\Http\Requests\Admin\StoreInventoryRequest;
 use App\Http\Requests\Admin\UpdateInventoryRequest;

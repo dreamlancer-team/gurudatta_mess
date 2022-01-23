@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use App\Http\Requests\Admin\StoreNoticeRequest;
 use App\Http\Requests\Admin\UpdateNoticeRequest;

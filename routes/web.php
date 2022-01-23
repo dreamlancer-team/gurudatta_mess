@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/admin')->group(function () {
+
+    Route::view('/dasshboard', 'dashboard');
+
+    Route::resource('/meal', MealController::class);
 });

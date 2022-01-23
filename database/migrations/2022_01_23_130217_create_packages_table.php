@@ -17,6 +17,7 @@ class CreatePackagesTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('meal_id')->constrained();
+            $table->string('time');
             $table->boolean('type');
             $table->string('price');
             $table->timestamps();

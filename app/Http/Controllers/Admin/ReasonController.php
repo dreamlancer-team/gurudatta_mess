@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Reason;
 use App\Http\Requests\Admin\StoreReasonRequest;
 use App\Http\Requests\Admin\UpdateReasonRequest;
