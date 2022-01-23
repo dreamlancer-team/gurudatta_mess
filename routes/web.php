@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->group(function () {
 
-    Route::view('/dasshboard', 'dashboard');
+    Route::view('/dashboard', 'admin/dashboard');
 
     Route::resource('/meal', MealController::class);
 });

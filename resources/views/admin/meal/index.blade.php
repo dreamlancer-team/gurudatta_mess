@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @push('main')
-<div class="card">
+<div class="card col-md-10 offset-md-1">
     <x-card.header title="Meal">
         <form action="{{ route('meal.store') }}" method="post">
             @csrf
