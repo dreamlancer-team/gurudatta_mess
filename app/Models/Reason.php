@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Reason extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'slug'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function getNameAttribute($name)
+    {
+        return ucfirst($name);
+    }
 }

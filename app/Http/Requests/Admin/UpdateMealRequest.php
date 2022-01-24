@@ -24,8 +24,7 @@ class UpdateMealRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'slug' => 'unique:meals slug',
+            'name' => 'required|unique:meals',
         ];
     }
 }

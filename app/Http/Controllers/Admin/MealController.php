@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Meal;
 use App\Http\Requests\Admin\StoreMealRequest;
 use App\Http\Requests\Admin\UpdateMealRequest;
-use App\Models\Package;
 
 class MealController extends Controller
 {
@@ -49,10 +48,12 @@ class MealController extends Controller
      */
     public function update(UpdateMealRequest $request, Meal $meal)
     {
-        $meal->update([
-            'name' => $request->name,
-            'slug' => slug($request->name)
-        ]);
+        if ($request->validated()) {
+            $meal->update([
+                'name' => $request->name,
+                'slug' => slug($request->name)
+            ]);
+        }
 
         return back()->with('success', 'Meal updated successfully');
     }

@@ -16,17 +16,8 @@ class ReasonController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $reasons = Reason::all();
+        return view('admin.reason.index', compact('reasons'));
     }
 
     /**
@@ -37,29 +28,14 @@ class ReasonController extends Controller
      */
     public function store(StoreReasonRequest $request)
     {
-        //
-    }
+        if ($request->validated()) {
+            Reason::create([
+                'name' => $request->name,
+                'slug' => slug($request->name)
+            ]);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Reason  $reason
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Reason $reason)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Reason  $reason
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reason $reason)
-    {
-        //
+        return back()->with('success', 'Reason created successfully');
     }
 
     /**
@@ -71,7 +47,14 @@ class ReasonController extends Controller
      */
     public function update(UpdateReasonRequest $request, Reason $reason)
     {
-        //
+        if ($request->validated()) {
+            $reason->update([
+                'name' => $request->name,
+                'slug' => slug($request->name)
+            ]);
+        }
+
+        return back()->with('success', 'Reason updated successfully');
     }
 
     /**
@@ -82,6 +65,8 @@ class ReasonController extends Controller
      */
     public function destroy(Reason $reason)
     {
-        //
+        $reason->delete();
+
+        return back()->with('success', 'Reason deleted successfully');
     }
 }

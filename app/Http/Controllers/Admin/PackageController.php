@@ -19,7 +19,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::with('meal')->get();
-        $meals = Meal::all('id', 'name', 'slug');
+        $meals = Meal::all('id', 'name');
         return view('admin.package.index', compact('packages', 'meals'));
     }
 
@@ -38,7 +38,6 @@ class PackageController extends Controller
                 'slug' => slug($request->name),
                 'meal_id' => $request->meal,
                 'type' => $request->type,
-                'package' => $request->package,
                 'price' => $request->price,
             ]);
         }
@@ -55,7 +54,15 @@ class PackageController extends Controller
      */
     public function update(UpdatePackageRequest $request, Package $package)
     {
-        //
+        $package->update([
+            'name' => $request->name,
+            'slug' => slug($request->name),
+            'meal_id' => $request->meal,
+            'type' => $request->type,
+            'price' => $request->price,
+        ]);
+
+        return back()->with('success', 'Package updated successfully');
     }
 
     /**
@@ -69,7 +76,7 @@ class PackageController extends Controller
         try {
             $package->delete();
 
-            return back()->with('success', 'Package Deleted successfully');
+            return back()->with('success', 'Package deleted successfully');
         } catch (\Illuminate\Database\QueryException $e) {
 
             if ($e->getCode() == "23000") {
