@@ -78,3 +78,28 @@ if (!function_exists('slug')) {
         return Str::slug($string);
     }
 }
+
+/**
+ * return tiffin types.
+ *
+ * @return string
+ */
+if (!function_exists('getTiffinTypes')) {
+    function getTiffinTypes()
+    {
+        $types = [
+            [
+                'id' => 0,
+                'name' => 'Half Tiffin',
+                'slug' => 'half-tiffin',
+            ],
+            [
+                'id' => 1,
+                'name' => 'Full Tiffin',
+                'slug' => 'full-tiffin',
+            ]
+        ];
+
+        return json_decode(json_encode($types), FALSE);
+    }
+}

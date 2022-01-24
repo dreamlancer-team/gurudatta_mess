@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Meal;
 use App\Http\Requests\Admin\StoreMealRequest;
 use App\Http\Requests\Admin\UpdateMealRequest;
-
+use App\Models\Package;
 
 class MealController extends Controller
 {
@@ -41,17 +41,6 @@ class MealController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Meal  $meal
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Meal $meal)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\UpdateMealRequest  $request
@@ -76,8 +65,15 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        $meal->delete();
+        try {
+            $meal->delete();
 
-        return back()->with('success', 'Meal deleted successfully');
+            return back()->with('success', 'Meal deleted successfully');
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            if ($e->getCode() == "23000") {
+                return back()->with('error', 'Meal can\'t be deleted because it was used in Package');
+            }
+        }
     }
 }

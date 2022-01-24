@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Http\Requests\Admin\StorePackageRequest;
 use App\Http\Requests\Admin\UpdatePackageRequest;
+use App\Models\Meal;
+use App\Models\User;
 
 class PackageController extends Controller
 {
@@ -16,18 +18,11 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        $packages = Package::with('meal')->get();
+        $meals = Meal::all('id', 'name', 'slug');
+        return view('admin.package.index', compact('packages', 'meals'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,29 +32,18 @@ class PackageController extends Controller
      */
     public function store(StorePackageRequest $request)
     {
-        //
-    }
+        if ($request->validated()) {
+            Package::create([
+                'name' => $request->name,
+                'slug' => slug($request->name),
+                'meal_id' => $request->meal,
+                'type' => $request->type,
+                'package' => $request->package,
+                'price' => $request->price,
+            ]);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Package $package)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Package $package)
-    {
-        //
+        return back()->with('success', 'Package created successfully');
     }
 
     /**
@@ -82,6 +66,15 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        try {
+            $package->delete();
+
+            return back()->with('success', 'Package Deleted successfully');
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            if ($e->getCode() == "23000") {
+                return back()->with('error', 'Package can\'t be deleted because it was assign to Customer');
+            }
+        }
     }
 }

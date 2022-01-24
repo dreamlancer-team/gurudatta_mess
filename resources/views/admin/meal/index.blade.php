@@ -12,7 +12,7 @@
         </form>
     </x-card.header>
     <x-card.body>
-        <x-table.table :headers="['#', 'Name']">
+        <x-table.table :headers="['#', 'Name', 'Action']">
             @foreach ($meals as $meal)
             <tr>
                 <td>{{ $loop -> index + 1 }}</td>

@@ -31,6 +31,7 @@
                     </a>
                 </div>
                <x-sidebar.link url='admin/meal' name="Meal"></x-sidebar.link>
+               <x-sidebar.link url='admin/package' name="Package"></x-sidebar.link>
             </div>
         </div>
     </div>

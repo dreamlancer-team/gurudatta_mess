@@ -16,8 +16,8 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->foreignId('meal_id')->constrained();
-            $table->string('time');
             $table->boolean('type');
             $table->string('price');
             $table->timestamps();

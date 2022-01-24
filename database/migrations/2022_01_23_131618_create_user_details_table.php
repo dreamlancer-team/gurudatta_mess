@@ -18,6 +18,7 @@ class CreateUserDetailsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('mobile');
             $table->foreignId('package_id')->constrained();
+            $table->string('time')->nullable();
             $table->string('home_address')->nullable();
             $table->string('office_address')->nullable();
             $table->boolean('status')->default(1);
