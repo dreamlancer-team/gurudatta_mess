@@ -16,12 +16,10 @@ class CreateUserDetailsTable extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('mobile');
             $table->foreignId('package_id')->constrained();
             $table->string('time')->nullable();
             $table->string('home_address')->nullable();
             $table->string('office_address')->nullable();
-            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

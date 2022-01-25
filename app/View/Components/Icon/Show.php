@@ -4,22 +4,19 @@ namespace App\View\Components\Icon;
 
 use Illuminate\View\Component;
 
-class Edit extends Component
+class Show extends Component
 {
-    public $slug, $route, $title;
-
+    public $title, $slug, $route;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($slug, $route, $title)
+    public function __construct($title = null, $slug, $route)
     {
-        $this->slug = $slug;
-
-        $this->route = $route;
-
         $this->title = $title;
+        $this->slug = $slug;
+        $this->route = $route;
     }
 
     /**
@@ -29,6 +26,6 @@ class Edit extends Component
      */
     public function render()
     {
-        return view('components.icon.edit');
+        return view('components.icon.show');
     }
 }

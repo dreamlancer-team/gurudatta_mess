@@ -1,25 +1,21 @@
 <?php
 
-namespace App\View\Components\Icon;
+namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class Edit extends Component
+class Image extends Component
 {
-    public $slug, $route, $title;
+    public $label;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($slug, $route, $title)
+    public function __construct($label)
     {
-        $this->slug = $slug;
-
-        $this->route = $route;
-
-        $this->title = $title;
+        $this->label = $label;
     }
 
     /**
@@ -29,6 +25,6 @@ class Edit extends Component
      */
     public function render()
     {
-        return view('components.icon.edit');
+        return view('components.form.image');
     }
 }

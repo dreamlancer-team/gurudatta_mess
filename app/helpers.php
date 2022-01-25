@@ -1,10 +1,9 @@
 
 <?php
 
-use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
@@ -68,6 +67,54 @@ if (!function_exists('getLoggedInUserEmail')) {
 }
 
 /**
+ * return admin role id
+ * 
+ * @return String
+ */
+if (!function_exists('getAdminRoleId')) {
+    function getAdminRoleId()
+    {
+        return 1;
+    }
+}
+
+/**
+ * return delivery boy role id
+ * 
+ * @return String
+ */
+if (!function_exists('getDeliveryRoleId')) {
+    function getDeliveryRoleId()
+    {
+        return 2;
+    }
+}
+
+/**
+ * return user role id
+ * 
+ * @return String
+ */
+if (!function_exists('getUserRoleId')) {
+    function getUserRoleId()
+    {
+        return 3;
+    }
+}
+
+/**
+ * return id's whose role user
+ * 
+ * @return String
+ */
+if (!function_exists('getUsersIds')) {
+    function getUsersIds()
+    {
+        return User::where('role', getUserRoleId())->pluck('id');
+    }
+}
+
+/**
  * return slug.
  *
  * @return string
@@ -76,6 +123,18 @@ if (!function_exists('slug')) {
     function slug($string)
     {
         return Str::slug($string);
+    }
+}
+
+/**
+ * return date.
+ *
+ * @return date
+ */
+if (!function_exists('format_date')) {
+    function format_date(string $date)
+    {
+        return Carbon::parse($date, config('app.timezone'))->format('d-M-Y');
     }
 }
 
@@ -101,5 +160,36 @@ if (!function_exists('getTiffinTypes')) {
         ];
 
         return json_decode(json_encode($types), FALSE);
+    }
+}
+
+/**
+ * return units.
+ *
+ * @return string
+ */
+if (!function_exists('getUnits')) {
+    function getUnits()
+    {
+        $units = [
+            [
+                'name' => 'Kilgogram',
+                'id' => 'kg',
+            ],
+            [
+                'name' => 'Dozen',
+                'id' => 'dzn',
+            ],
+            [
+                'name' => 'Liter',
+                'id' => 'ltr',
+            ],
+            [
+                'name' => 'Packet',
+                'id' => 'pkt',
+            ]
+        ];
+
+        return json_decode(json_encode($units), FALSE);
     }
 }

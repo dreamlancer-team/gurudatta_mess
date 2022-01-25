@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['data', 'user_id'];
+
+    public function getRouteKeyName()
+    {
+        return 'created_at';
+    }
 }

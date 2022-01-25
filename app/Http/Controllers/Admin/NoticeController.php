@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use App\Http\Requests\Admin\StoreNoticeRequest;
 use App\Http\Requests\Admin\UpdateNoticeRequest;
+use App\Models\User;
 
 class NoticeController extends Controller
 {
@@ -16,17 +17,9 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $notices = Notice::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.notice.index', compact('notices'));
     }
 
     /**
@@ -37,51 +30,21 @@ class NoticeController extends Controller
      */
     public function store(StoreNoticeRequest $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Notice $notice)
-    {
-        //
-    }
+        $image = null;
+        if ($request->hasFile('image')) {
+            $request->image->store('notice', 'public');
+            $image = $request->image->hashName();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Notice $notice)
-    {
-        //
-    }
+        $notice = Notice::create([
+            'title' => $request->title,
+            'message' => $request->message,
+            'image' => $image,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\UpdateNoticeRequest  $request
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateNoticeRequest $request, Notice $notice)
-    {
-        //
-    }
+        $notice->users()->sync(getUsersIds());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Notice $notice)
-    {
-        //
+        return back()->with('success', 'Notice send');
     }
 }

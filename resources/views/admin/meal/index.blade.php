@@ -18,7 +18,7 @@
                 <td>{{ $loop -> index + 1 }}</td>
                 <td>{{ $meal -> name }}</td>
                 <td class="d-flex">
-                    <x-icon.edit slug='{{ $meal -> slug }}' route='meal'>
+                    <x-icon.edit title='Update Meal' slug='{{ $meal -> slug }}' route='meal'>
                         <x-form.input label="Name" value="{{ $meal -> name }}" name="name"></x-form.input>
                     </x-icon.edit>
                     

@@ -16,17 +16,8 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $lists = Inventory::all();
+        return view('admin.inventory.index', compact('lists'));
     }
 
     /**
@@ -37,7 +28,12 @@ class InventoryController extends Controller
      */
     public function store(StoreInventoryRequest $request)
     {
-        //
+        Inventory::create([
+            'data' => json_encode($request->group),
+            'user_id' => getLoggedInUserId()
+        ]);
+
+        return back()->with('success', 'Inventory created successfully');
     }
 
     /**
@@ -47,17 +43,6 @@ class InventoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Inventory $inventory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Inventory  $inventory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Inventory $inventory)
     {
         //
     }

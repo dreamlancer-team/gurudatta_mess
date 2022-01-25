@@ -24,7 +24,7 @@
                 <td>{{ $package -> type ? 'Full Tiffin' : 'Half tiffin' }}</td>
                 <td>{{ $package -> price }}</td>
                 <td class="d-flex">
-                    <x-icon.edit slug='{{ $package -> slug }}' route='package'>
+                    <x-icon.edit title='Update Package' slug='{{ $package -> slug }}' route='package'>
                         <x-form.input label="Name" value="{{ $package -> name }}" name="name"></x-form.input>
                         <x-form.option label="Meal" value="{{ $package -> meal -> id }}" name="meal" :items="$meals"></x-form.option>
                         <x-form.option label="Type" value="{{ $package -> type }}" name="type" :items="getTiffinTypes()"></x-form.option>

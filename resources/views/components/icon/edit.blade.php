@@ -4,7 +4,7 @@
 <form action="{{ route($route . '.update' , $slug) }}" method="post">
     @csrf
     {{ method_field('PUT') }}
-    <x-modal.modal title="Update Meal" slug='{{ $slug }}'>
+    <x-modal.modal title='{{ $title }}' slug='{{ $slug }}'>
         {{ $slot }}
     </x-modal.modal>
 </form>
