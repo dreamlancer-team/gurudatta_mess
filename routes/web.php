@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\MealController;
 use App\Http\Controllers\Admin\NoticeController;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->group(function () {
 
-    Route::view('/dashboard', 'admin/dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/inventory', InventoryController::class);
 

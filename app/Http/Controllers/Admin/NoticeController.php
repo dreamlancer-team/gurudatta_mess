@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use App\Http\Requests\Admin\StoreNoticeRequest;
-use App\Http\Requests\Admin\UpdateNoticeRequest;
 use App\Models\User;
 
 class NoticeController extends Controller
@@ -17,7 +16,7 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        $notices = Notice::all();
+        $notices = Notice::latest()->get();
 
         return view('admin.notice.index', compact('notices'));
     }
@@ -43,7 +42,7 @@ class NoticeController extends Controller
             'image' => $image,
         ]);
 
-        $notice->users()->sync(getUsersIds());
+        $notice->users()->sync(getActiveUsersIds());
 
         return back()->with('success', 'Notice send');
     }

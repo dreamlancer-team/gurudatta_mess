@@ -16,7 +16,7 @@ class MealController extends Controller
      */
     public function index()
     {
-        $meals = Meal::all();
+        $meals = Meal::latest()->get();
         return view('admin.meal.index', compact('meals'));
     }
 

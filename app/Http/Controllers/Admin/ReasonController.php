@@ -16,7 +16,7 @@ class ReasonController extends Controller
      */
     public function index()
     {
-        $reasons = Reason::all();
+        $reasons = Reason::latest()->get();
         return view('admin.reason.index', compact('reasons'));
     }
 

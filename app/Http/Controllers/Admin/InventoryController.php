@@ -16,7 +16,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $lists = Inventory::all();
+        $lists = Inventory::latest()->get();
         return view('admin.inventory.index', compact('lists'));
     }
 

@@ -115,6 +115,30 @@ if (!function_exists('getUsersIds')) {
 }
 
 /**
+ * return id's of active user
+ * 
+ * @return String
+ */
+if (!function_exists('getActiveUsersIds')) {
+    function getActiveUsersIds()
+    {
+        return User::where('role', getUserRoleId() && 'status', 1)->pluck('id');
+    }
+}
+
+/**
+ * return id's whose role user
+ * 
+ * @return String
+ */
+if (!function_exists('getDeliveryIds')) {
+    function getDeliveryIds()
+    {
+        return User::where('role', getDeliveryRoleId())->pluck('id');
+    }
+}
+
+/**
  * return slug.
  *
  * @return string
@@ -134,7 +158,7 @@ if (!function_exists('slug')) {
 if (!function_exists('format_date')) {
     function format_date(string $date)
     {
-        return Carbon::parse($date, config('app.timezone'))->format('d-M-Y');
+        return Carbon::parse($date, config('app.timezone'))->format('d M Y');
     }
 }
 
@@ -187,6 +211,14 @@ if (!function_exists('getUnits')) {
             [
                 'name' => 'Packet',
                 'id' => 'pkt',
+            ],
+            [
+                'name' => 'Peice',
+                'id' => 'pcs',
+            ],
+            [
+                'name' => 'Bunch',
+                'id' => 'bunch',
             ]
         ];
 

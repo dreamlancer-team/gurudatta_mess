@@ -18,7 +18,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::with('meal')->get();
+        $packages = Package::with('meal')->latest()->get();
         $meals = Meal::all('id', 'name');
         return view('admin.package.index', compact('packages', 'meals'));
     }
