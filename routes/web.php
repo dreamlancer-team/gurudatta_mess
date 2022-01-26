@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->group(function () {
 
+    Route::view('/login', 'admin.auth.login');
+
+    Route::view('/reset-password', 'admin.auth.reset-password');
+
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/inventory', InventoryController::class);
