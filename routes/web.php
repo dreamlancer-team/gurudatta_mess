@@ -15,6 +15,7 @@ Route::prefix('/admin')->group(function () {
 
     Route::view('/reset-password', 'admin.auth.reset-password');
 
+
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/inventory', InventoryController::class);
