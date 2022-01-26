@@ -30,6 +30,7 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </div>
+               <x-sidebar.link url='admin/user' name="User"></x-sidebar.link>
                <x-sidebar.link url='admin/inventory' name="Inventory"></x-sidebar.link>
                <x-sidebar.link url='admin/notice' name="Notice"></x-sidebar.link>
                <x-sidebar.link url='admin/meal' name="Meal"></x-sidebar.link>

@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Notice::class, 'notice_users');
     }
+
+    public function user_detail()
+    {
+        return $this->hasOne(UserDetail::class);
+    }
 }

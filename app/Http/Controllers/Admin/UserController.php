@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreAccountRequest;
-use App\Http\Requests\Admin\UpdateAccountRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
 
-class AccountController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,15 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::whereIn('id', getUsersIds())
+            ->with([
+                'user_detail:id,user_id,balance,package_id,time,home_address,office_address',
+            ])
+            ->select(['id', 'name', 'email', 'mobile', 'status', 'created_at'])
+            ->get();
+
+
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -31,10 +39,10 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreAccountRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAccountRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +50,10 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
     }
@@ -53,10 +61,10 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
     }
@@ -64,11 +72,11 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateAccountRequest  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAccountRequest $request, $id)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -76,10 +84,10 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }

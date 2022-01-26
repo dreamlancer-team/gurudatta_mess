@@ -12,7 +12,7 @@
                 <x-widget.stat bg='success' icon='users' count='{{$active}}' title='Active Users'></x-widget.stat>
             </div>
             <div class="col-xl-3">
-                <x-widget.stat bg='danger' icon='users' count='{{$deactive}}' title='Deactive Users'></x-widget.stat>
+                <x-widget.stat bg='danger' icon='users' count='{{$deactive}}' title='Inactive Users'></x-widget.stat>
             </div>
             <div class="col-xl-3">
                 <x-widget.stat bg='warning' icon='users' count='{{$delivery_boys}}' title='Delievery Boy'></x-widget.stat>

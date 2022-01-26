@@ -16,6 +16,7 @@ class CreateUserDetailsTable extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('balance')->default(0);
             $table->foreignId('package_id')->constrained();
             $table->string('time')->nullable();
             $table->string('home_address')->nullable();

@@ -7,7 +7,7 @@
             @csrf
             <div class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal">New</div>
             <x-modal.modal title="Package">
-                <x-form.input label="Name" name="name"></x-form.input>
+                <x-form.input label="Name (Set name like Full veg)" name="name" placeholder="Name"></x-form.input>
                 <x-form.option label="Meal" name="meal" :items="$meals"></x-form.option>
                 <x-form.option label="Type" name="type" :items="getTiffinTypes()"></x-form.option>
                 <x-form.input label="Price" name="price" type="number"></x-form.input>

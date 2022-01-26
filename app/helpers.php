@@ -122,7 +122,19 @@ if (!function_exists('getUsersIds')) {
 if (!function_exists('getActiveUsersIds')) {
     function getActiveUsersIds()
     {
-        return User::where('role', getUserRoleId() && 'status', 1)->pluck('id');
+        return User::whereIn('id', getUsersIds())->where('status', 1)->pluck('id');
+    }
+}
+
+/**
+ * return id's of inactive user
+ * 
+ * @return String
+ */
+if (!function_exists('getInactiveUsersIds')) {
+    function getInactiveUsersIds()
+    {
+        return User::whereIn('id', getUsersIds())->where('status', 0)->pluck('id');
     }
 }
 
