@@ -9,11 +9,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::select('id')->get();
-        $customers = $users->whereIn('id', getUsersIds())->count();
-        $deactive = $users->whereIn('id', getInactiveUsersIds())->count();
-        $active = $users->whereIn('id', getActiveUsersIds())->count();
-        $delivery_boys = $users->whereIn('id', getDeliveryIds())->count();
+        $customers = getUsersIds()->count();
+        $deactive = getInactiveUsersIds()->count();
+        $active = getActiveUsersIds()->count();
+        $delivery_boys = getDeliveryIds()->count();
         return view('admin.dashboard', compact('customers', 'deactive', 'active', 'delivery_boys'));
     }
 }
