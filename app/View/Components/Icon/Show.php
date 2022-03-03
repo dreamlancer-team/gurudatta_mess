@@ -6,15 +6,14 @@ use Illuminate\View\Component;
 
 class Show extends Component
 {
-    public $title, $slug, $route;
+    public $slug, $route;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title = null, $slug, $route)
+    public function __construct($slug, $route)
     {
-        $this->title = $title;
         $this->slug = $slug;
         $this->route = $route;
     }
